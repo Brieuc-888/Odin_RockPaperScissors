@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Odin_Project_RockPaperScissors</title>
+</head>
+<body>
+  <script>
+
+const rock = "Rock";
+const paper = "Paper";
+const scissors = "Scissors";
+
+// 1 Get the computer to make a random choice
+
+function getComputerChoice() {
+    let randomNumber = Math.floor(Math.random()* 3);
+    let computerChoice;
+
+    if (randomNumber === 0) {
+        computerChoice = rock;
+    } else if (randomNumber === 1) {
+        computerChoice = paper;
+    } else {
+        computerChoice = scissors;
+    }
+
+    return computerChoice;
+}
+
+console.log(getComputerChoice())
+
+// 2 Get the player to be able to choose Rock/Paper/Scissors
+// 3 Set the rules for the game ( one round )
+// 4 get the game running
+// 5 Get the computer to declare the winner and comment the result
+// 6 Get the computer to go for 5 rounds
+        // Adapt the rules
+        // Adapt the comments
+        // Keep track of the score
+        // Declare a winner
+        // Final comment on the result
+// 7 Get the computer to reset the game
+
+  </script>
+</body>
+</html>
