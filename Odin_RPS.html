@@ -11,11 +11,33 @@ const rock = "Rock";
 const paper = "Paper";
 const scissors = "Scissors";
 
-// 1 Get the computer to make a random choice
+// 1 Get the player to be able to choose Rock/Paper/Scissors
+
+let playerChoice;
+
+function getPlayerChoice() {
+  let whatYouChoose = prompt("Rock, Paper or Scissors ?");
+  if (whatYouChoose.toLowerCase() === ("rock")) {
+    playerChoice = rock;
+  } else if (whatYouChoose.toLowerCase() === "paper") {
+    playerChoice = paper;
+  } else if (whatYouChoose.toLowerCase() === "scissors") {
+    playerChoice = scissors;
+  } else {
+    alert("This ain't a valid weapon !");
+  }
+
+  return playerChoice;
+}
+
+console.log(getPlayerChoice());
+
+// 2 Get the computer to make a random choice
+
+let computerChoice;
 
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random()* 3);
-    let computerChoice;
 
     if (randomNumber === 0) {
         computerChoice = rock;
@@ -30,10 +52,56 @@ function getComputerChoice() {
 
 console.log(getComputerChoice())
 
-// 2 Get the player to be able to choose Rock/Paper/Scissors
 // 3 Set the rules for the game ( one round )
 // 4 get the game running
 // 5 Get the computer to declare the winner and comment the result
+
+let winner;
+let pointsPlayer;
+let pointsComputer;
+
+function getWinner() {
+
+    // Player plays Rock
+    if (playerChoice === rock && computerChoice === rock) {
+        alert(" Rock to Rock it's a Tie !");
+    } else if (playerChoice === rock && computerChoice === paper) {
+        pointsPlayer = 0;
+        pointsComputer = 1;
+        alert("What a shame, Paper covers Rock  Yeah... That's the loser vibe");
+    } else if (playerChoice === rock && computerChoice === scissors) {
+        pointsPlayer = 1;
+        pointsComputer = 0;
+        alert("Yay ! The Rock rolls the Scissors out ! Such a winner vibe");
+    
+        // Player plays Paper    
+    } else if (playerChoice === paper && computerChoice === rock) {
+        pointsPlayer = 1;
+        pointsComputer = 0;
+        alert("Yay ! Paper flies over the Rock, feel the power of the words");
+    } else if (playerChoice === paper && computerChoice === paper) {
+        alert(" Paper Paper Tiger it's a Tie !");
+    } else if (playerChoice === paper && computerChoice === scissors) {
+        pointsPlayer = 0;
+        pointsComputer = 1;
+        alert("Ouch ! you just got cut my paper friend");
+    
+    // Player plays Scissors    
+    } else if (playerChoice === scissors && computerChoice === rock) {
+        pointsPlayer = 0;
+        pointsComputer = 1;
+        alert("OOOOUUU You just broke your teeth against a Rock ! Might be painful");
+    } else if (playerChoice === scissors && computerChoice === paper) {
+        pointsPlayer = 1;
+        pointsComputer = 0;
+        alert("Well you just sliced your opponent in two !");
+    } else if (playerChoice === scissors && computerChoice === scissors) {
+        alert("Scissors kiss ! It's a tie");
+    }
+}
+
+console.log(getWinner());
+
 // 6 Get the computer to go for 5 rounds
         // Adapt the rules
         // Adapt the comments
