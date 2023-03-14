@@ -4,112 +4,154 @@
   <meta charset="UTF-8">
   <title>Odin_Project_RockPaperScissors</title>
 </head>
-<body>
-  <script>
+  <body> 
+    <script>
 
 const rock = "Rock";
 const paper = "Paper";
 const scissors = "Scissors";
 
-// 1 Get the player to be able to choose Rock/Paper/Scissors
+// Get the player to choose Rock/Paper/Scissors
 
-let playerChoice;
 
 function getPlayerChoice() {
   let whatYouChoose = prompt("Rock, Paper or Scissors ?");
-  if (whatYouChoose.toLowerCase() === ("rock")) {
-    playerChoice = rock;
+  if (whatYouChoose.toLowerCase() === "rock") {
+     return rock;
   } else if (whatYouChoose.toLowerCase() === "paper") {
-    playerChoice = paper;
+    return paper;
   } else if (whatYouChoose.toLowerCase() === "scissors") {
-    playerChoice = scissors;
+    return scissors;
   } else {
     alert("This ain't a valid weapon !");
   }
-
-  return playerChoice;
 }
 
 console.log(getPlayerChoice());
 
-// 2 Get the computer to make a random choice
+// Get the computer to make a random choice
 
-let computerChoice;
 
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random()* 3);
 
     if (randomNumber === 0) {
-        computerChoice = rock;
+        return rock;
     } else if (randomNumber === 1) {
-        computerChoice = paper;
+        return paper;
     } else {
-        computerChoice = scissors;
+        return scissors;
     }
-
-    return computerChoice;
 }
 
 console.log(getComputerChoice())
 
-// 3 Set the rules for the game ( one round )
-// 4 get the game running
-// 5 Get the computer to declare the winner and comment the result
+//  Rules for one round
 
-let winner;
-let pointsPlayer;
-let pointsComputer;
-
-function getWinner() {
+function oneRound() {
+     let playerChoice = getPlayerChoice();
+     let computerChoice = getComputerChoice();
 
     // Player plays Rock
     if (playerChoice === rock && computerChoice === rock) {
         alert(" Rock to Rock it's a Tie !");
     } else if (playerChoice === rock && computerChoice === paper) {
-        pointsPlayer = 0;
-        pointsComputer = 1;
         alert("What a shame, Paper covers Rock  Yeah... That's the loser vibe");
+        return "computer";
     } else if (playerChoice === rock && computerChoice === scissors) {
-        pointsPlayer = 1;
-        pointsComputer = 0;
         alert("Yay ! The Rock rolls the Scissors out ! Such a winner vibe");
+        return "player";
     
         // Player plays Paper    
     } else if (playerChoice === paper && computerChoice === rock) {
-        pointsPlayer = 1;
-        pointsComputer = 0;
         alert("Yay ! Paper flies over the Rock, feel the power of the words");
+        return "player";
     } else if (playerChoice === paper && computerChoice === paper) {
         alert(" Paper Paper Tiger it's a Tie !");
     } else if (playerChoice === paper && computerChoice === scissors) {
-        pointsPlayer = 0;
-        pointsComputer = 1;
         alert("Ouch ! you just got cut my paper friend");
+        return "computer";
     
     // Player plays Scissors    
     } else if (playerChoice === scissors && computerChoice === rock) {
-        pointsPlayer = 0;
-        pointsComputer = 1;
         alert("OOOOUUU You just broke your teeth against a Rock ! Might be painful");
+        return "computer";
     } else if (playerChoice === scissors && computerChoice === paper) {
-        pointsPlayer = 1;
-        pointsComputer = 0;
         alert("Well you just sliced your opponent in two !");
+        return "player";
     } else if (playerChoice === scissors && computerChoice === scissors) {
         alert("Scissors kiss ! It's a tie");
     }
+
+    return {
+        pointsPlayer,
+        pointsComputer,
+    };
 }
 
-console.log(getWinner());
+// Loop to make it 5 rounds without tie 
+// Points & rounds count
 
-// 6 Get the computer to go for 5 rounds
-        // Adapt the rules
-        // Adapt the comments
-        // Keep track of the score
-        // Declare a winner
-        // Final comment on the result
-// 7 Get the computer to reset the game
+let pointsPlayer = 0;
+let pointsComputer = 0;
 
-  </script>
-</body>
+function game() {
+    let totalCount = 0;
+    
+    while (totalCount < 5) {
+        let roundResult = oneRound();
+
+        if (roundResult === "player"){
+            pointsPlayer ++;
+            totalCount ++;
+        } else if ( roundResult === "computer"){
+            pointsComputer ++;
+            totalCount ++;
+        } else {
+            continue;
+        }
+        console.log("your score:" + pointsPlayer);
+        console.log("The machine score:" + pointsComputer);
+    }
+    alert(getTheWinner(pointsPlayer, pointsComputer));
+    console.log("Round(s) played:" + totalCount);
+    console.log("your score:" + pointsPlayer);
+    console.log("The machine score:" + pointsComputer);
+   
+  tryAgain();  
+}
+
+// Declare the winner of the match
+
+function getTheWinner(pointsPlayer, pointsComputer){
+    
+    if (pointsPlayer > pointsComputer) {
+        return "You're the Boss ! You did it You rock the beat Now you can go get drunk !"
+    } else if (pointsPlayer < pointsComputer) {
+        return "You've lost... You're not gonna sleep until you get revenge my friend"
+    }
+}
+
+
+// Do you want to give it another shot ?
+
+function tryAgain() {
+    let wannaTryAgain = confirm("Do you want to give it another shot ?");
+
+    if (wannaTryAgain === true) {
+        pointsComputer = 0;
+        pointsPlayer = 0;
+        totalCount = 0;
+        game();
+    } else {
+        alert("Bybye my Chicken friend");
+    }
+}
+
+game();
+
+
+
+    </script>
+  </body>
 </html>
