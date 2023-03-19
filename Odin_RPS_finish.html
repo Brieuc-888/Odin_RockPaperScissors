@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Odin_Project_RockPaperScissors</title>
+</head>
+  <body> 
+    <script>
+
+const rock = "Rock";
+const paper = "Paper";
+const scissors = "Scissors";
+
+// Get the player to choose Rock/Paper/Scissors
+
+
+function getPlayerChoice() {
+  let whatYouChoose = prompt("Rock, Paper or Scissors ?");
+  if (whatYouChoose.toLowerCase() === "rock") {
+     return rock;
+  } else if (whatYouChoose.toLowerCase() === "paper") {
+    return paper;
+  } else if (whatYouChoose.toLowerCase() === "scissors") {
+    return scissors;
+  } else {
+    alert("This ain't a valid weapon !");
+  }
+  
+}
+
+
+
+// Get the computer to make a random choice
+
+
+function getComputerChoice() {
+    let randomNumber = Math.floor(Math.random()* 3);
+
+    if (randomNumber === 0) {
+        return rock;
+    } else if (randomNumber === 1) {
+        return paper;
+    } else {
+        return scissors;
+    }
+    
+}
+
+
+
+//  Rules for one round
+
+function oneRound() {
+     let playerChoice = getPlayerChoice();
+     let computerChoice = getComputerChoice();
+
+    // Player plays Rock
+    if (playerChoice === rock && computerChoice === rock) {
+        alert(" Rock to Rock it's a Tie !");
+    } else if (playerChoice === rock && computerChoice === paper) {
+        alert("What a shame, Paper covers Rock  Yeah... That's the loser vibe");
+        return "computer";
+    } else if (playerChoice === rock && computerChoice === scissors) {
+        alert("Yay ! The Rock rolls the Scissors out ! Such a winner vibe");
+        return "player";
+    
+        // Player plays Paper    
+    } else if (playerChoice === paper && computerChoice === rock) {
+        alert("Yay ! Paper flies over the Rock, feel the power of the words");
+        return "player";
+    } else if (playerChoice === paper && computerChoice === paper) {
+        alert(" Paper Paper Tiger it's a Tie !");
+    } else if (playerChoice === paper && computerChoice === scissors) {
+        alert("Ouch ! you just got cut my paper friend");
+        return "computer";
+    
+    // Player plays Scissors    
+    } else if (playerChoice === scissors && computerChoice === rock) {
+        alert("OOOOUUU You just broke your teeth against a Rock ! Might be painful");
+        return "computer";
+    } else if (playerChoice === scissors && computerChoice === paper) {
+        alert("Well you just sliced your opponent in two !");
+        return "player";
+    } else if (playerChoice === scissors && computerChoice === scissors) {
+        alert("Scissors kiss ! It's a tie");
+    }
+
+    return {
+        pointsPlayer,
+        pointsComputer,
+    };
+}
+
+// Loop to make it 5 rounds without tie 
+// Points & rounds count
+
+let pointsPlayer = 0;
+let pointsComputer = 0;
+
+function game() {
+    let totalCount = 0;
+    
+    while (totalCount < 5) {
+        let roundResult = oneRound();
+
+        if (roundResult === "player"){
+            pointsPlayer ++;
+            totalCount ++;
+        } else if ( roundResult === "computer"){
+            pointsComputer ++;
+            totalCount ++;
+        } else {
+            continue;
+        }
+        console.log("your score:" + pointsPlayer);
+        console.log("The machine score:" + pointsComputer);
+    }
+    alert(getTheWinner(pointsPlayer, pointsComputer));
+    console.log("Round(s) played:" + totalCount);
+    console.log("your score:" + pointsPlayer);
+    console.log("The machine score:" + pointsComputer);
+   
+  tryAgain();  
+}
+
+// Declare the winner of the match
+
+function getTheWinner(pointsPlayer, pointsComputer){
+    
+    if (pointsPlayer > pointsComputer) {
+        return "You're the Boss ! You did it You rock the beat Now you can go get drunk !"
+    } else if (pointsPlayer < pointsComputer) {
+        return "You've lost... You're not gonna sleep until you get revenge my friend"
+    }
+}
+
+
+// Do you want to give it another shot ?
+
+function tryAgain() {
+    let wannaTryAgain = confirm("Do you want to give it another shot ?");
+
+    if (wannaTryAgain === true) {
+        pointsComputer = 0;
+        pointsPlayer = 0;
+        totalCount = 0;
+        game();
+    } else {
+        alert("Bybye my Chicken friend");
+    }
+}
+
+game();
+
+
+
+    </script>
+  </body>
+</html>
